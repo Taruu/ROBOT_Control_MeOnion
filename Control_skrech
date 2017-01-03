@@ -1,0 +1,60 @@
+#include <Arduino.h>
+#include <Wire.h>
+#include <SoftwareSerial.h>
+#include <MeOrion.h>
+
+MeBluetooth bluetooth(PORT_5);
+double angle_rad = PI/180.0;
+double angle_deg = 180.0/PI;
+MeDCMotor motor_9(9);
+MeDCMotor motor_10(10);
+
+
+char Data = 0;
+void setup(){
+    Serial.begin(115200);
+    bluetooth.begin(115200);
+    Serial.println("Bluetooth Start");
+}
+
+void loop()
+{
+    bluetooth.write(Data);
+    Data = bluetooth.read();
+    if(((1000)==(Data))){
+        motor_9.run(-255);
+        motor_10.run(-255);
+    }else{
+        if((( 0100 )==(Data))){
+            motor_9.run(255);
+            motor_10.run(255);
+        }else{
+            if(((0010)==(Data))){
+                motor_9.run(-255);
+                motor_10.run(255);
+            }else{
+                if(((0001)==(Data))){
+                    motor_9.run(255);
+                    motor_10.run(-255);
+                }else{
+                    if(((0000)==(Data))){
+                        motor_9.run(0);
+                        motor_10.run(0);
+                    }
+                }
+            }
+        }
+    }
+    
+    _loop();
+}
+
+void _delay(float seconds){
+    long endTime = millis() + seconds * 1000;
+    while(millis() < endTime)_loop();
+}
+
+void _loop(){
+    
+}
+
