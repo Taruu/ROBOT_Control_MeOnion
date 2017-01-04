@@ -1,0 +1,28 @@
+#include "MeOrion.h"
+#include <Wire.h>
+#include <SoftwareSerial.h>
+MeBluetooth bluetooth(PORT_5);
+
+char T = 'S';
+
+void setup()
+{
+  Serial.begin(9600);
+  bluetooth.begin(9600);
+  Serial.println("Bluetooth Start");
+}
+
+void loop() {
+  bluetooth.write(T);
+
+  _loop();
+}
+
+void _delay(float seconds) {
+  long endTime = millis() + seconds * 1000;
+  while (millis() < endTime)_loop();
+}
+
+void _loop() {
+
+}
