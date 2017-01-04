@@ -1,7 +1,7 @@
 
 #include <Wire.h>
 #include <SoftwareSerial.h>
-#include <MeOrion.h>
+#include "MeOrion.h"
 
 MeBluetooth bluetooth(PORT_5);
 double angle_rad = PI/180.0;
