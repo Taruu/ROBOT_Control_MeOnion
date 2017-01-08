@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO.Ports;
+using System.Threading;
+
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+
+            SerialPort port = new SerialPort("COM4",9600,Parity.None,8,StopBits.Two);
+            //_serialPort.Handshake = Handshake.None;
+            byte[] bytesToSend = new byte[9] { 0xff, 0x55, 0x06, 0x00, 0x02, 0x0a, 0x09, 0xff, 0x00 };
+            
+
+
+
+         //   String HEX1 = "ff 55 06 00 02 0a 09 ff 00";
+            while (true)
+            {
+                String Asr = "Open";
+                string A = Convert.ToString(Console.ReadLine());
+                if (A == Asr)
+                {
+                    port.Open();
+                    Console.WriteLine("OK");
+
+
+
+                }
+                if("Start"== A)
+                {
+                    port.Write(bytesToSend, 0, 9);
+
+                }
+
+            }
+        }
+    }
+}
