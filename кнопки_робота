@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace robot_Control
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Имя кнопок
+            MessageBox.Show(keyData.ToString());
+            return true;
+
+            
+            if (keyData == (Keys.Control | Keys.X))
+            {
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+    }
+}
